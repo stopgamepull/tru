@@ -1,0 +1,717 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God Emperor Trump on Solana</title>
+    <link rel="icon" type="image/png" href="images/trump_zjt2tr.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #000 100%);
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .solana-symbol {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: url('images/252px-Solana_logo.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            z-index: 1;
+        }
+
+        .trump-container {
+            position: absolute;
+            width: 280px;
+            height: 350px;
+            transform-style: preserve-3d;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .trump-name {
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #FFD700;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .trump-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .trump-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg,
+                transparent 0%,
+                rgba(255, 215, 0, 0.1) 30%,
+                rgba(255, 215, 0, 0.3) 45%,
+                rgba(255, 215, 0, 0.4) 50%,
+                rgba(255, 215, 0, 0.3) 55%,
+                rgba(255, 215, 0, 0.1) 70%,
+                transparent 100%
+            );
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+
+        .trump-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+        }
+
+        .title {
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            width: auto;
+            text-align: right;
+            font-size: 3.5em;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF4500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 
+                3px 3px 0 rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(255, 215, 0, 0.5),
+                0 0 40px rgba(255, 215, 0, 0.3);
+            font-weight: 900;
+            letter-spacing: 2px;
+            z-index: 2;
+            animation: titleGlow 3s ease-in-out infinite;
+            padding: 20px;
+            border-radius: 10px;
+            transform: skew(-5deg);
+        }
+
+        .subtitle {
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            font-size: 1.2em;
+            color: #14F195;
+            text-shadow: 0 0 10px rgba(20, 241, 149, 0.5);
+            font-weight: 600;
+            letter-spacing: 1px;
+            z-index: 2;
+            animation: subtitlePulse 2s ease-in-out infinite;
+            padding: 5px 20px;
+            transform: skew(-5deg);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .subtitle img {
+            width: 24px;
+            height: 24px;
+            animation: rotateSlow 4s linear infinite;
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes subtitlePulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(20, 241, 149, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(20, 241, 149, 0.8); }
+        }
+
+        .title::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #FFD700, transparent, #FFD700);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 3s ease-in-out infinite;
+            transform: skew(5deg);
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            margin: -400px 0 0 -400px;
+            animation: slowRotate 48s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes slowRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .character {
+            position: absolute;
+            width: 100px;
+            height: 140px;
+            animation: keepUpright 48s linear infinite;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        @keyframes keepUpright {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }  /* Counter-rotate to stay upright */
+        }
+
+        .character:nth-child(1) { left: calc(50% + 250px); top: calc(50% - 50px); }     /* Right */
+        .character:nth-child(2) { left: calc(50% + 200px); top: calc(50% - 200px); }    /* Top Right */
+        .character:nth-child(3) { left: calc(50% + 150px); top: calc(50% - 300px); }    /* Top Right */
+        .character:nth-child(4) { left: 50%; top: calc(50% - 350px); }                  /* Top */
+        .character:nth-child(5) { left: calc(50% - 150px); top: calc(50% - 300px); }    /* Top Left */
+        .character:nth-child(6) { left: calc(50% - 200px); top: calc(50% - 200px); }    /* Top Left */
+        .character:nth-child(7) { left: calc(50% - 250px); top: calc(50% - 50px); }     /* Left */
+        .character:nth-child(8) { left: calc(50% - 200px); top: calc(50% + 150px); }    /* Bottom Left */
+        .character:nth-child(9) { left: calc(50% - 150px); top: calc(50% + 250px); }    /* Bottom Left */
+        .character:nth-child(10) { left: 50%; top: calc(50% + 300px); }                 /* Bottom */
+        .character:nth-child(11) { left: calc(50% + 150px); top: calc(50% + 250px); }   /* Bottom Right */
+        .character:nth-child(12) { left: calc(50% + 200px); top: calc(50% + 150px); }   /* Bottom Right */
+
+        .character-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform: rotateY(15deg);
+        }
+
+        .character-card:hover {
+            transform: scale(1.1) rotateY(15deg);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .character img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .character-name {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #FFD700;
+            font-size: 0.9em;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .laser-beam {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #FFD700, transparent);
+            animation: laser 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotateY(0); }
+            50% { transform: translateY(-20px) rotateY(10deg); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotateZ(45deg); }
+            100% { transform: translateX(100%) rotateZ(45deg); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes characterFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes laser {
+            0%, 100% { height: 0; opacity: 0; }
+            50% { height: 100px; opacity: 1; }
+        }
+
+        .price-ticker {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #FFD700;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .info-card {
+            position: absolute;
+            width: 300px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #FFD700;
+            border-radius: 15px;
+            padding: 20px;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .info-card.left {
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .info-card.right {
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .info-card h2 {
+            color: #FFD700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .info-card li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            line-height: 1.4;
+        }
+
+        .info-card li::before {
+            content: "🚀";
+            margin-right: 10px;
+        }
+
+        .info-card .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        .info-card .timer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .timer span {
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 5px 8px;
+            border-radius: 5px;
+            margin: 0 2px;
+            min-width: 30px;
+        }
+
+        .timer-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .urgent-message {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 650px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 18px 25px;
+            color: #fff;
+            z-index: 999999;
+            animation: pulse 2s infinite, attention 2s ease-out;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 1.3em;
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+            font-weight: 500;
+        }
+
+        .urgent-message::before {
+            content: "⚠️";
+            font-size: 2em;
+            margin-right: 5px;
+            animation: shake 2s ease-out;
+        }
+
+        .urgent-message .highlight {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .urgent-message .tweet {
+            display: inline-block;
+            font-style: italic;
+            color: #bbb;
+            margin: 0 8px;
+            font-weight: 400;
+            font-size: 0.95em;
+        }
+
+        @keyframes attention {
+            0% {
+                transform: scale(1);
+                background: rgba(0, 0, 0, 0.9);
+            }
+            20% {
+                transform: scale(1.05);
+                background: rgba(255, 107, 107, 0.2);
+            }
+            40% {
+                transform: scale(1);
+                background: rgba(0, 0, 0, 0.9);
+            }
+            60% {
+                transform: scale(1.05);
+                background: rgba(255, 107, 107, 0.2);
+            }
+            80% {
+                transform: scale(1);
+                background: rgba(0, 0, 0, 0.9);
+            }
+            100% {
+                transform: scale(1);
+                background: rgba(0, 0, 0, 0.9);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .urgent-message .content {
+            flex: 1;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(255, 107, 107, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.2); }
+        }
+
+        .twitter-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            color: #1DA1F2;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #1DA1F2;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .twitter-link:hover {
+            background: rgba(29, 161, 242, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(29, 161, 242, 0.3);
+        }
+
+        .twitter-link svg {
+            width: 20px;
+            height: 20px;
+            fill: #1DA1F2;
+        }
+    </style>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <div class="matrix-rain"></div>
+    <div class="container">
+        <div class="urgent-message">
+            <div class="content">
+                <span class="tweet">"We're taking over crypto, folks! $TRUMP to the MOON! 🚀"</span>
+                <br>
+                <span class="highlight">BREAKING:</span> Trump just launched his meme coin. Last time he tweeted, MAGA pumped <span class="highlight">580x</span>. 
+                Don't be left behind. ⏰
+            </div>
+        </div>
+
+        <div class="title">GOD EMPEROR TRUMP</div>
+        <div class="subtitle">
+            POWERED BY SOLANA
+            <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana Logo">
+        </div>
+        
+        <div class="info-card left">
+            <h2>🚀 $TRUMP Token Launch</h2>
+            <ul>
+                <li>Limited supply: <span class="highlight">45M TRUMP</span></li>
+                <li>Weekly token burns based on meme virality</li>
+                <li>Backed by: Elon, SBF (pre-jail), Putin</li>
+                <li>Staking rewards up to <span class="highlight">1776% APY</span></li>
+                <li>Presale price: <span class="highlight">1 TRUMP = 0.45 SOL</span></li>
+            </ul>
+            <div class="timer">
+                <div class="timer-label">Presale starts in:</div>
+                <div>
+                    <span id="presale-hours">47</span>h
+                    <span id="presale-minutes">59</span>m
+                    <span id="presale-seconds">59</span>s
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card right">
+            <h2>🎮 Meme Trading Cards</h2>
+            <ul>
+                <li>Collect all <span class="highlight">12 GOD CARDS</span></li>
+                <li>Dynamic NFTs evolve with Twitter engagement</li>
+                <li>Governance rights in TrumpDAO</li>
+                <li>Exclusive access to <span class="highlight">Mar-a-Lago Metaverse</span></li>
+                <li>Community already <span class="highlight">147k patriots</span> strong</li>
+            </ul>
+            <div class="timer">
+                <div class="timer-label">Mint opens in:</div>
+                <div>
+                    <span id="mint-hours">47</span>h
+                    <span id="mint-minutes">59</span>m
+                    <span id="mint-seconds">59</span>s
+                </div>
+            </div>
+        </div>
+
+        <div class="trump-container">
+            <div class="trump-card">
+                <img src="images/trump_zjt2tr.png" alt="Trump" class="trump-img">
+            </div>
+            <div class="trump-name">TRUMP</div>
+        </div>
+
+        <div class="orbit">
+            <!-- Characters will be added dynamically -->
+        </div>
+
+        <div class="price-ticker">
+            $TRUMP: 1,000,000 SOL 🚀 | Market Cap: TO THE MOON 🌕 | Holders: ALL OF AMERICA 🦅
+        </div>
+    </div>
+
+    <a href="https://x.com/trumpcardfun" target="_blank" class="twitter-link">
+        <svg viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+        </svg>
+        Follow us on Twitter
+    </a>
+
+    <script>
+        const characters = [
+            { id: 'altman_zetiwq', name: 'Sam Altman' },
+            { id: 'zuckerberg_yb8rbj', name: 'Mark Zuckerberg' },
+            { id: 'musk_fjz6xq', name: 'Elon Musk' },
+            { id: 'bezos_zj7iau', name: 'Jeff Bezos' },
+            { id: 'huang_yhn2nh', name: 'Jensen Huang' },
+            { id: 'kim_uljuez', name: 'Kim Jong Un' },
+            { id: 'mangione_t4xdqc', name: 'Luigi Mangione' },
+            { id: 'mrbeast_yifum7', name: 'Mr Beast' },
+            { id: 'rogan_vrfhvr', name: 'Joe Rogan' },
+            { id: 'sbf_obdhek', name: 'SBF' },
+            { id: 'tate_ygxi7g', name: 'Andrew Tate' },
+            { id: 'putin_gbpguq', name: 'Vladimir Putin' }
+        ];
+
+        // Create static characters
+        const orbit = document.querySelector('.orbit');
+        characters.forEach((char, index) => {
+            const character = document.createElement('div');
+            character.className = 'character';
+            
+            character.innerHTML = `
+                <div class="character-card">
+                    <img src="https://res.cloudinary.com/dwo36vqcu/image/upload/v1737170911/${char.id}.png" alt="${char.name}">
+                </div>
+                <div class="character-name">${char.name}</div>
+            `;
+            orbit.appendChild(character);
+        });
+
+        // Create Solana Matrix Rain
+        function createSolanaRain() {
+            const rain = document.querySelector('.matrix-rain');
+            const symbol = document.createElement('div');
+            symbol.className = 'solana-symbol';
+            
+            // Random position and duration
+            const duration = Math.random() * 3 + 2; // 2-5 seconds
+            symbol.style.left = Math.random() * 100 + 'vw';
+            symbol.style.animationDuration = duration + 's';
+            
+            rain.appendChild(symbol);
+            
+            // Remove after animation
+            setTimeout(() => {
+                symbol.remove();
+            }, duration * 1000);
+        }
+
+        // Create rain drops periodically
+        setInterval(createSolanaRain, 100);
+
+        // Countdown Timer
+        function updateCountdown(hoursElem, minutesElem, secondsElem, totalSeconds) {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            
+            hoursElem.textContent = hours.toString().padStart(2, '0');
+            minutesElem.textContent = minutes.toString().padStart(2, '0');
+            secondsElem.textContent = seconds.toString().padStart(2, '0');
+            
+            return totalSeconds > 0 ? totalSeconds - 1 : 0;
+        }
+
+        // Initialize countdowns
+        let presaleSeconds = 172800; // 48 hours in seconds
+        let mintSeconds = 172800;
+
+        // Update timers every second
+        setInterval(() => {
+            presaleSeconds = updateCountdown(
+                document.getElementById('presale-hours'),
+                document.getElementById('presale-minutes'),
+                document.getElementById('presale-seconds'),
+                presaleSeconds
+            );
+        }, 1000);
+
+        setInterval(() => {
+            mintSeconds = updateCountdown(
+                document.getElementById('mint-hours'),
+                document.getElementById('mint-minutes'),
+                document.getElementById('mint-seconds'),
+                mintSeconds
+            );
+        }, 1000);
+    </script>
+
+
+</body></html>
